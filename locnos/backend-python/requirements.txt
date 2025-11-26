@@ -1,0 +1,63 @@
+# ============================================================================
+# DEPENDÊNCIAS ESSENCIAIS PARA MVP
+# ============================================================================
+
+# FastAPI Framework
+fastapi==0.108.0
+uvicorn[standard]==0.25.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+
+# Validação
+pydantic[email]==2.5.3
+pydantic-settings==2.1.0
+email-validator>=2.0.0
+
+# Autenticação
+python-jose[cryptography]==3.3.0
+passlib==1.7.4
+bcrypt==4.0.1
+
+# Environment
+python-dotenv==1.0.0
+
+# ============================================================================
+# DEPENDÊNCIAS SISTEMA LOGÍSTICA DROGUISTA
+# ============================================================================
+
+# Google Drive API
+google-auth==2.23.4
+google-auth-oauthlib==1.1.0
+google-auth-httplib2==0.1.1
+google-api-python-client==2.108.0
+
+# Geração de PDF
+reportlab==4.0.7
+python-barcode==0.15.1
+qrcode[pil]==7.4.2
+pillow==10.1.0
+
+# Otimização de Rotas e Geolocalização
+geopy==2.4.1
+scipy==1.11.4
+
+# Processamento de Imagens (assinatura, fotos)
+python-magic==0.4.27
+
+# ============================================================================
+# DESENVOLVIMENTO
+# ============================================================================
+
+# Code Quality
+black==23.12.1
+
+# ============================================================================
+# NOTAS:
+# - Outras dependências (PDF, Excel, Celery, etc) foram removidas
+# - Instale conforme necessário depois
+# - Para produção: pip install gunicorn
+# ============================================================================
+

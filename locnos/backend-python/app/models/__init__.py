@@ -1,0 +1,28 @@
+# Facilita imports dos models
+from .user import User, UserRole, UserStatus, DocumentType
+from .equipment import Equipment, EquipmentStatus
+from .category import Category
+from .subcategoria import Subcategoria
+from .person import Person, PersonType, PersonDocumentType, PersonStatus
+
+# Sistema Logística Droguista
+from .pedido import Pedido, StatusPedido, TipoFrete
+from .transportadora import Transportadora
+from .veiculo import Veiculo, TipoVeiculo, StatusVeiculo
+from .rota import Rota, TipoRota, StatusRota
+from .comprovante_entrega import ComprovanteEntrega, StatusEntrega, TipoOcorrencia
+
+__all__ = [
+    "User", "UserRole", "UserStatus", "DocumentType",
+    "Equipment", "EquipmentStatus",
+    "Category",
+    "Subcategoria",
+    "Person", "PersonType", "PersonDocumentType", "PersonStatus",
+    # Logística
+    "Pedido", "StatusPedido", "TipoFrete",
+    "Transportadora",
+    "Veiculo", "TipoVeiculo", "StatusVeiculo",
+    "Rota", "TipoRota", "StatusRota",
+    "ComprovanteEntrega", "StatusEntrega", "TipoOcorrencia",
+]
+
