@@ -15,7 +15,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { useCreateEquipment } from '@/lib/hooks/useEquipment';
+import { useCreateEquipment, useUpdateEquipment } from '@/lib/hooks/useEquipment';
+import type { Equipment } from '@/types';
 import { equipmentSchema, type EquipmentFormData } from '@/lib/validations/schemas';
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api/client';
@@ -23,11 +24,15 @@ import api from '@/lib/api/client';
 interface EquipmentModalProps {
     open: boolean;
     onClose: () => void;
+    equipment?: Equipment;
+    mode?: 'create' | 'edit';
 }
 
-export function EquipmentModal({ open, onClose }: EquipmentModalProps) {
+export function EquipmentModal({ open, onClose, equipment, mode = 'create' }: EquipmentModalProps) {
     const createEquipment = useCreateEquipment();
+    const updateEquipment = useUpdateEquipment();
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const isEditMode = mode === 'edit';
 
     const {
         register,
@@ -36,7 +41,16 @@ export function EquipmentModal({ open, onClose }: EquipmentModalProps) {
         reset,
     } = useForm<EquipmentFormData>({
         resolver: zodResolver(equipmentSchema),
-        defaultValues: {
+        defaultValues: equipment ? {
+            name: equipment.name,
+            brand: equipment.brand || '',
+            internal_code: equipment.internal_code,
+            description: equipment.description || '',
+            category_id: equipment.category_id,
+            quantity_total: equipment.quantity_total,
+            rental_value: equipment.rental_value || undefined,
+            status: equipment.status,
+        } : {
             status: 'AVAILABLE',
             quantity_total: 1,
         },
@@ -53,12 +67,17 @@ export function EquipmentModal({ open, onClose }: EquipmentModalProps) {
     const onSubmit = async (data: EquipmentFormData) => {
         setIsSubmitting(true);
         try {
-            await createEquipment.mutateAsync(data as any);
+            if (isEditMode && equipment) {
+                await updateEquipment.mutateAsync({ id: equipment.id, data: data as any });
+                alert('✅ Equipamento atualizado com sucesso!');
+            } else {
+                await createEquipment.mutateAsync(data as any);
+                alert('✅ Equipamento criado com sucesso!');
+            }
             reset();
             onClose();
-            alert('✅ Equipamento criado com sucesso!');
         } catch (error: any) {
-            alert(`Erro ao criar equipamento: ${error.response?.data?.detail || error.message}`);
+            alert(`Erro ao ${isEditMode ? 'atualizar' : 'criar'} equipamento: ${error.response?.data?.detail || error.message}`);
         } finally {
             setIsSubmitting(false);
         }
@@ -68,9 +87,9 @@ export function EquipmentModal({ open, onClose }: EquipmentModalProps) {
         <Dialog open={open} onOpenChange={onClose}>
             <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Novo Equipamento</DialogTitle>
+                    <DialogTitle>{isEditMode ? 'Editar Equipamento' : 'Novo Equipamento'}</DialogTitle>
                     <DialogDescription>
-                        Adicione um novo equipamento ao catálogo
+                        {isEditMode ? 'Atualize as informações do equipamento' : 'Adicione um novo equipamento ao catálogo'}
                     </DialogDescription>
                 </DialogHeader>
 
@@ -169,7 +188,7 @@ export function EquipmentModal({ open, onClose }: EquipmentModalProps) {
                             Cancelar
                         </Button>
                         <Button type="submit" disabled={isSubmitting}>
-                            {isSubmitting ? 'Criando...' : 'Criar Equipamento'}
+                            {isSubmitting ? (isEditMode ? 'Salvando...' : 'Criando...') : (isEditMode ? 'Salvar Alterações' : 'Criar Equipamento')}
                         </Button>
                     </DialogFooter>
                 </form>

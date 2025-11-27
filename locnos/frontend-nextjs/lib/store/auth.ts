@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import api from '../api/client';
+import { api, auth } from '@/lib/auth';
 import type { User, LoginCredentials, AuthResponse } from '@/types';
 
 interface AuthState {
@@ -12,11 +12,12 @@ interface AuthState {
     login: (credentials: LoginCredentials) => Promise<void>;
     logout: () => void;
     setAuth: (user: User, token: string) => void;
+    checkAuth: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
     persist(
-        (set) => ({
+        (set, get) => ({
             user: null,
             token: null,
             isAuthenticated: false,
@@ -30,7 +31,7 @@ export const useAuthStore = create<AuthState>()(
                     const { access_token } = response.data;
 
                     // 2. Salvar token
-                    localStorage.setItem('access_token', access_token);
+                    auth.setToken(access_token);
 
                     // 3. Buscar dados do usuário
                     const userResponse = await api.get<User>('/auth/me');
@@ -50,7 +51,7 @@ export const useAuthStore = create<AuthState>()(
             },
 
             logout: () => {
-                localStorage.removeItem('access_token');
+                auth.removeToken();
                 set({
                     user: null,
                     token: null,
@@ -59,21 +60,31 @@ export const useAuthStore = create<AuthState>()(
             },
 
             setAuth: (user: User, token: string) => {
+                auth.setToken(token);
                 set({
                     user,
                     token,
                     isAuthenticated: true,
                 });
             },
+
+            checkAuth: () => {
+                const token = auth.getToken();
+                if (token) {
+                    set({ isAuthenticated: true, token });
+                } else {
+                    set({ isAuthenticated: false, token: null, user: null });
+                }
+            }
         }),
         {
             name: 'auth-storage',
             storage: createJSONStorage(() => localStorage),
             partialize: (state) => ({
                 user: state.user,
-                token: state.token,
                 isAuthenticated: state.isAuthenticated,
             }),
         }
     )
 );
+

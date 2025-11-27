@@ -1,10 +1,10 @@
-# Locnos - Equipment Rental Management System
+# Locnos-Antigravity - Equipment Rental Management System
 
 Sistema completo de gestão para locadoras de equipamentos com portal para clientes.
 
 ## 🎯 Visão Geral
 
-Locnos é uma plataforma moderna de gestão de locadoras que oferece:
+Locnos-Antigravity é uma plataforma moderna de gestão de locadoras que oferece:
 
 - **Para Gestores**: Controle completo de estoque, contratos, financeiro e clientes
 - **Para Clientes**: Catálogo online, solicitação de orçamentos e acompanhamento de contratos

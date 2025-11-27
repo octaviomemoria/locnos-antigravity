@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Locnos - Sistema de Gestão para Locadoras",
+  title: "Locnos-Antigravity - Sistema de Gestão para Locadoras",
   description: "Sistema completo de gestão para locadoras de equipamentos",
 };
 

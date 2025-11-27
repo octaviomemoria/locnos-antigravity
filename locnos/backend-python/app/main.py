@@ -128,7 +128,7 @@ async def internal_error_handler(request, exc):
 # INCLUIR ROUTERS
 # ============================================================================
 
-from app.api.v1 import auth_router, equipment_router, persons_router, subcategorias_router
+from app.api.v1 import auth_router, equipment_router, persons_router, subcategorias_router, dashboard_router
 
 app.include_router(
     auth_router,
@@ -152,6 +152,12 @@ app.include_router(
     subcategorias_router,
     prefix=f"{settings.API_V1_STR}/subcategorias",
     tags=["Subcategorias"]
+)
+
+app.include_router(
+    dashboard_router,
+    prefix=f"{settings.API_V1_STR}/dashboard",
+    tags=["Dashboard"]
 )
 
 
