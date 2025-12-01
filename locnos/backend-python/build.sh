@@ -7,13 +7,16 @@ echo "🐍 Python version:"
 python --version
 
 echo ""
+echo "🧹 Cleaning pip cache..."
+pip cache purge || true
+
+echo ""
 echo "📦 Upgrading pip..."
 pip install --upgrade pip
 
 echo ""
 echo "🔧 Installing production dependencies..."
-# Use requirements-production.txt para evitar dependências que precisam de compilação
-pip install -r requirements-production.txt --no-cache-dir
+pip install -r requirements-production.txt --no-cache-dir --force-reinstall
 
 echo ""
 echo "✅ Build completed successfully!"
