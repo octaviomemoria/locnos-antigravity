@@ -5,7 +5,7 @@ Gerencia comprovantes digitais de entrega (e-POD - electronic Proof of Delivery)
 Armazena assinaturas e fotos no Google Drive.
 """
 
-from sqlalchemy import Column, String, Boolean, DateTime, Enum, Numeric, Text, ForeignKey
+from sqlalchemy import Column, String, Boolean, DateTime, Enum, Numeric, Text, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
 import uuid
