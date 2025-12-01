@@ -11,8 +11,9 @@ echo "📦 Upgrading pip..."
 pip install --upgrade pip
 
 echo ""
-echo "🔧 Installing dependencies from requirements.txt..."
-pip install -r requirements.txt --no-cache-dir
+echo "🔧 Installing production dependencies..."
+# Use requirements-production.txt para evitar dependências que precisam de compilação
+pip install -r requirements-production.txt --no-cache-dir
 
 echo ""
 echo "✅ Build completed successfully!"

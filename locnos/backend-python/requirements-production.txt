@@ -1,0 +1,36 @@
+# ============================================================================
+# DEPENDÊNCIAS ESSENCIAIS PARA MVP - PRODUCTION
+# ============================================================================
+
+# FastAPI Framework
+fastapi==0.108.0
+uvicorn[standard]==0.25.0
+python-multipart==0.0.6
+
+# Database
+sqlalchemy==2.0.25
+psycopg2-binary==2.9.9
+
+# Validação
+pydantic[email]==2.5.3
+pydantic-settings==2.1.0
+email-validator>=2.0.0
+
+# Autenticação
+python-jose[cryptography]==3.3.0
+passlib==1.7.4
+bcrypt==4.0.1
+
+# Environment
+python-dotenv==1.0.0
+
+# HTTP Client
+httpx==0.25.2
+
+# ============================================================================
+# NOTAS DE PRODUÇÃO:
+# - Dependências de otimização de rotas (scipy, geopy) removidas temporariamente
+# - Dependências de geração de PDF (reportlab, pillow) removidas temporariamente
+# - Dependências do Google Drive removidas temporariamente
+# - Adicione conforme necessário depois do MVP estar funcionando
+# ============================================================================
