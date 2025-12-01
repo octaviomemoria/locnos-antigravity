@@ -10,7 +10,8 @@ from .pedido import Pedido, StatusPedido, TipoFrete
 from .transportadora import Transportadora
 from .veiculo import Veiculo, TipoVeiculo, StatusVeiculo
 from .rota import Rota, TipoRota, StatusRota
-from .comprovante_entrega import ComprovanteEntrega, StatusEntrega, TipoOcorrencia
+# TODO: Descomentar quando implementar sistema de entregas completo
+# from .comprovante_entrega import ComprovanteEntrega, StatusEntrega, TipoOcorrencia
 
 __all__ = [
     "User", "UserRole", "UserStatus", "DocumentType",
