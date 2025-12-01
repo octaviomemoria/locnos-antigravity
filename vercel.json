@@ -1,7 +1,0 @@
-{
-    "buildCommand": "cd locnos/frontend-nextjs && npm run build",
-    "devCommand": "cd locnos/frontend-nextjs && npm run dev",
-    "installCommand": "cd locnos/frontend-nextjs && npm install",
-    "framework": "nextjs",
-    "outputDirectory": "locnos/frontend-nextjs/.next"
-}
