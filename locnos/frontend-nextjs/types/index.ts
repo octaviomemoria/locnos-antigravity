@@ -75,6 +75,10 @@ export interface Equipment {
     visible: boolean;
     featured: boolean;
 
+    // Relações (populadas opcionalmente)
+    category?: Category;
+    subcategory?: Subcategory;
+
     created_at: string;
     updated_at: string;
 }
