@@ -38,7 +38,7 @@ google-api-python-client==2.108.0
 reportlab==4.0.7
 python-barcode==0.15.1
 qrcode[pil]==7.4.2
-pillow==10.1.0
+pillow==10.4.0  # Atualizado para compatibilidade com Python 3.11
 
 # Otimização de Rotas e Geolocalização
 geopy==2.4.1

@@ -1,9 +1,20 @@
 #!/usr/bin/env bash
-# exit on error
+# Build script for Render deployment
+# Exit on error
 set -o errexit
 
-echo "🔧 Installing Python dependencies..."
-pip install --upgrade pip
-pip install -r requirements.txt
+echo "🐍 Python version:"
+python --version
 
+echo ""
+echo "📦 Upgrading pip..."
+pip install --upgrade pip
+
+echo ""
+echo "🔧 Installing dependencies from requirements.txt..."
+pip install -r requirements.txt --no-cache-dir
+
+echo ""
 echo "✅ Build completed successfully!"
+echo "📊 Installed packages:"
+pip list | grep -E "fastapi|uvicorn|sqlalchemy|pydantic"
