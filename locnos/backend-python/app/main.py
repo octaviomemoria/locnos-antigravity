@@ -57,6 +57,13 @@ async def health_check():
     }
 
 
+@app.get("/api/health")
+async def api_health_check():
+    """Health check alternativo - compatível com Render"""
+    return await health_check()
+
+
+
 @app.get(f"{settings.API_V1_STR}/test")
 async def test_endpoint():
     """Endpoint de teste"""
