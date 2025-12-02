@@ -45,7 +45,8 @@ const PERSON_TYPES = [
     { value: 'PARTNER', label: 'Parceiro' },
 ];
 
-export function PersonModal({ open, onClose }: PersonModalProps) {
+export function PersonModal({ open, onClose, person: initialPerson }: PersonModalProps) {
+    const person = initialPerson as any;
     const queryClient = useQueryClient();
     const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
     const [documentType, setDocumentType] = useState<'CPF' | 'CNPJ'>('CPF');
