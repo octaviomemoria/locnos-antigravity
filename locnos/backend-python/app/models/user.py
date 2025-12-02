@@ -38,7 +38,7 @@ class DocumentType(str, enum.Enum):
 class User(Base):
     """Model de Usuário"""
     
-    __tablename__ = "usuarios"
+    __tablename__ = "users"
     
     # Identificação
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -57,37 +57,42 @@ class User(Base):
     whatsapp = Column(String(20))
     
     # Documento (CPF ou CNPJ)
-    document_type = Column(Enum(DocumentType), nullable=False)
-    document_number = Column(String(20), unique=True, nullable=False, index=True)
-    document_verified = Column(Boolean, default=False)
+    # Documento (CPF ou CNPJ)
+    document_type = Column("documentType", Enum(DocumentType), nullable=False)
+    document_number = Column("documentNumber", String(20), unique=True, nullable=False, index=True)
+    document_verified = Column("documentVerified", Boolean, default=False)
     
     # Endereço (desnormalizado para performance)
-    address_street = Column(String(200))
-    address_number = Column(String(20))
-    address_complement = Column(String(100))
-    address_neighborhood = Column(String(100))
-    address_city = Column(String(100))
-    address_state = Column(String(2))
-    address_zip_code = Column(String(10))
-    address_country = Column(String(50), default="Brasil")
+    # Endereço (desnormalizado para performance)
+    address_street = Column("addressStreet", String(200))
+    address_number = Column("addressNumber", String(20))
+    address_complement = Column("addressComplement", String(100))
+    address_neighborhood = Column("addressNeighborhood", String(100))
+    address_city = Column("addressCity", String(100))
+    address_state = Column("addressState", String(2))
+    address_zip_code = Column("addressZipCode", String(10))
+    address_country = Column("addressCountry", String(50), default="Brasil")
     
     # Empresa (para CNPJ)
-    company_name = Column(String(200))
-    company_trade_name = Column(String(200))
-    company_state_registration = Column(String(50))
-    company_municipal_registration = Column(String(50))
+    # Empresa (para CNPJ)
+    company_name = Column("companyName", String(200))
+    company_trade_name = Column("companyTradeName", String(200))
+    company_state_registration = Column("companyStateRegistration", String(50))
+    company_municipal_registration = Column("companyMunicipalRegistration", String(50))
     
     # Permissões (array de strings)
     permissions = Column(ARRAY(String), default=[])
     
     # Localização/Filial
-    location_id = Column(UUID(as_uuid=True), nullable=True)
+    # Localização/Filial
+    location_id = Column("locationId", UUID(as_uuid=True), nullable=True)
     
     # Dados do cliente
-    credit_limit = Column(Numeric(10, 2), default=0)
-    total_rented = Column(Integer, default=0)
-    total_spent = Column(Numeric(10, 2), default=0)
-    last_rental = Column(DateTime(timezone=True), nullable=True)
+    # Dados do cliente
+    credit_limit = Column("creditLimit", Numeric(10, 2), default=0)
+    total_rented = Column("totalRented", Integer, default=0)
+    total_spent = Column("totalSpent", Numeric(10, 2), default=0)
+    last_rental = Column("lastRental", DateTime(timezone=True), nullable=True)
     notes = Column(Text)
     rating = Column(Integer, nullable=True)
     
@@ -95,13 +100,15 @@ class User(Base):
     avatar = Column(String(500))
     
     # Reset de senha
-    reset_password_token = Column(String(500))
-    reset_password_expire = Column(DateTime(timezone=True))
+    # Reset de senha
+    reset_password_token = Column("resetPasswordToken", String(500))
+    reset_password_expire = Column("resetPasswordExpire", DateTime(timezone=True))
     
     # Timestamps
-    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
-    last_login = Column(DateTime(timezone=True))
+    # Timestamps
+    created_at = Column("createdAt", DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column("updatedAt", DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    last_login = Column("lastLogin", DateTime(timezone=True))
     
     def __repr__(self):
         return f"<User {self.email} ({self.role})>"

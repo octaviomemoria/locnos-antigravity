@@ -14,7 +14,7 @@ from app.core.database import Base
 class Category(Base):
     """Model de Categoria"""
     
-    __tablename__ = "categorias"
+    __tablename__ = "categories"
     
     # Identificação
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -27,7 +27,8 @@ class Category(Base):
     image = Column(String(500))
     
     # Hierarquia
-    parent_id = Column(UUID(as_uuid=True), ForeignKey("categorias.id"), nullable=True, index=True)
+    # Hierarquia
+    parent_id = Column("parentId", UUID(as_uuid=True), ForeignKey("categories.id"), nullable=True, index=True)
     
     # Ordenação
     order = Column(Integer, default=0, index=True)
@@ -36,12 +37,14 @@ class Category(Base):
     active = Column(Boolean, default=True, nullable=False, index=True)
     
     # Metadados
-    total_equipment = Column(Integer, default=0)
-    popularity_score = Column(Integer, default=0)
+    # Metadados
+    total_equipment = Column("totalEquipment", Integer, default=0)
+    popularity_score = Column("popularityScore", Integer, default=0)
     
     # Timestamps
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    # Timestamps
+    created_at = Column("createdAt", DateTime(timezone=True), server_default=func.now())
+    updated_at = Column("updatedAt", DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     
     def __repr__(self):
         return f"<Category {self.name}>"
