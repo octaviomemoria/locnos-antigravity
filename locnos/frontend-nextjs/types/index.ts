@@ -150,6 +150,9 @@ export interface Person {
     company_name?: string;
     trade_name?: string;
     cnpj?: string;
+    state_registration?: string; // IE - Inscrição Estadual
+    municipal_registration?: string; // IM - Inscrição Municipal
+    ie?: string; // Alias para state_registration
 
     // Contato
     email?: string;
