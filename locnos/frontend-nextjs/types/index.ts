@@ -159,6 +159,9 @@ export interface Person {
     phone: string;
     whatsapp?: string;
 
+    // Endereço
+    address?: any; // JSONB no backend
+
     // Dados específicos
     references?: PersonReference[];
     driver_data?: DriverData;
