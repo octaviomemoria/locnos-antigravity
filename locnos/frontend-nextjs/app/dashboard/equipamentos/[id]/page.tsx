@@ -34,7 +34,8 @@ export default function EquipmentDetailPage() {
     const router = useRouter();
     const id = params.id as string;
 
-    const { data: equipment, isLoading, error } = useEquipmentById(id);
+    const { data: equipmentData, isLoading, error } = useEquipmentById(id);
+    const equipment = equipmentData as any;
 
     if (isLoading) {
         return (
