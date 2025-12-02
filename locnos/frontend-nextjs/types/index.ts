@@ -1,5 +1,6 @@
 // Tipos de usuários
-// Version: 1.0.1 - Updated Equipment interface with category relation
+// Version: 1.0.2 - Fixed Person interface with all required fields
+// Last updated: 2025-12-02T11:36:00Z
 export type UserRole = 'CUSTOMER' | 'STAFF' | 'ADMIN' | 'SUPER_ADMIN';
 export type UserStatus = 'ACTIVE' | 'INACTIVE' | 'BLOCKED' | 'PENDING';
 
