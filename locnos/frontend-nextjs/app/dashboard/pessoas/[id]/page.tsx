@@ -42,7 +42,8 @@ export default function PersonDetailPage() {
     const router = useRouter();
     const id = params.id as string;
 
-    const { data: person, isLoading, error } = usePersonById(id);
+    const { data: personData, isLoading, error } = usePersonById(id);
+    const person = personData as any;
 
     if (isLoading) {
         return (
