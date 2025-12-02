@@ -12,7 +12,7 @@ from app.core.database import SessionLocal
 from app.core.security import get_password_hash
 from app.models.user import User, UserRole, UserStatus, DocumentType
 from app.models.category import Category
-from app.models.subcategoria import Subcategoria
+# from app.models.subcategoria import Subcategoria
 from app.models.person import Person, PersonType, PersonDocumentType, PersonStatus
 from app.models.equipment import Equipment, EquipmentStatus
 
@@ -29,7 +29,7 @@ def seed_database():
         # ============================================================================
         print("\n🗑️  Limpando dados antigos...")
         db.query(Equipment).delete()
-        db.query(Subcategoria).delete()
+        # db.query(Subcategoria).delete()
         db.query(Person).delete()
         db.query(Category).delete()
         db.query(User).delete()
@@ -122,33 +122,33 @@ def seed_database():
         print(f"✅ {len(categorias)} categorias criadas")
         
         # ============================================================================
-        # SUBCATEGORIAS
+        # SUBCATEGORIAS (Agora são Categorias com parent_id)
         # ============================================================================
         print("\n📑 Criando subcategorias...")
         
         subcategorias_data = [
             # Construção Civil
-            {"nome": "Ferramentas Elétricas", "slug": "ferramentas-eletricas", "categoria_id": categorias[0].id, "ordem": 1},
-            {"nome": "Andaimes e Escadas", "slug": "andaimes-escadas", "categoria_id": categorias[0].id, "ordem": 2},
-            {"nome": "Betoneiras e Misturadores", "slug": "betoneiras-misturadores", "categoria_id": categorias[0].id, "ordem": 3},
+            {"name": "Ferramentas Elétricas", "slug": "ferramentas-eletricas", "parent_id": categorias[0].id, "order": 1},
+            {"name": "Andaimes e Escadas", "slug": "andaimes-escadas", "parent_id": categorias[0].id, "order": 2},
+            {"name": "Betoneiras e Misturadores", "slug": "betoneiras-misturadores", "parent_id": categorias[0].id, "order": 3},
             
             # Festas e Eventos
-            {"nome": "Iluminação", "slug": "iluminacao", "categoria_id": categorias[1].id, "ordem": 1},
-            {"nome": "Som e Áudio", "slug": "som-audio", "categoria_id": categorias[1].id, "ordem": 2},
-            {"nome": "Mobiliário", "slug": "mobiliario", "categoria_id": categorias[1].id, "ordem": 3},
+            {"name": "Iluminação", "slug": "iluminacao", "parent_id": categorias[1].id, "order": 1},
+            {"name": "Som e Áudio", "slug": "som-audio", "parent_id": categorias[1].id, "order": 2},
+            {"name": "Mobiliário", "slug": "mobiliario", "parent_id": categorias[1].id, "order": 3},
             
             # Equipamentos Médicos
-            {"nome": "Oxigenoterapia", "slug": "oxigenoterapia", "categoria_id": categorias[2].id, "ordem": 1},
-            {"nome": "Mobilidade", "slug": "mobilidade", "categoria_id": categorias[2].id, "ordem": 2},
+            {"name": "Oxigenoterapia", "slug": "oxigenoterapia", "parent_id": categorias[2].id, "order": 1},
+            {"name": "Mobilidade", "slug": "mobilidade", "parent_id": categorias[2].id, "order": 2},
             
             # Jardinagem
-            {"nome": "Corte e Poda", "slug": "corte-poda", "categoria_id": categorias[3].id, "ordem": 1},
-            {"nome": "Limpeza", "slug": "limpeza", "categoria_id": categorias[3].id, "ordem": 2},
+            {"name": "Corte e Poda", "slug": "corte-poda", "parent_id": categorias[3].id, "order": 1},
+            {"name": "Limpeza", "slug": "limpeza", "parent_id": categorias[3].id, "order": 2},
         ]
         
         subcategorias = []
         for sub_data in subcategorias_data:
-            sub = Subcategoria(**sub_data)
+            sub = Category(**sub_data)
             db.add(sub)
             subcategorias.append(sub)
         
@@ -296,8 +296,8 @@ def seed_database():
             {
                 "name": "Betoneira 400L Profissional",
                 "description": "Betoneira de 400 litros, motor 2HP, ideal para obras de médio porte. Mixer de alta qualidade com estrutura reforçada.",
-                "category_id": categorias[0].id,
-                "subcategory_id": subcategorias[2].id,  # Betoneiras
+                "category_id": subcategorias[2].id,  # Betoneiras (Subcategoria)
+                # "subcategory_id": subcategorias[2].id,
                 "brand": "Maqtron",
                 "internal_code": "BET-001",
                 "serial_number": "BET2024001",
@@ -339,8 +339,8 @@ def seed_database():
             {
                 "name": "Furadeira de Impacto Makita 1000W",
                 "description": "Furadeira de impacto profissional 1000W, ideal para concreto e alvenaria. Inclui maleta e kit de brocas.",
-                "category_id": categorias[0].id,
-                "subcategory_id": subcategorias[0].id,  # Ferramentas Elétricas
+                "category_id": subcategorias[0].id,  # Ferramentas Elétricas
+                # "subcategory_id": subcategorias[0].id,
                 "brand": "Makita",
                 "internal_code": "FUR-002",
                 "serial_number": "MAK2024045",
@@ -372,8 +372,8 @@ def seed_database():
             {
                 "name": "Kit Iluminação LED Festa (8 Refletores)",
                 "description": "Kit completo de iluminação LED para festas e eventos. 8 refletores RGB controláveis, tripés ajustáveis e mesa controladora DMX.",
-                "category_id": categorias[1].id,
-                "subcategory_id": subcategorias[3].id,  # Iluminação
+                "category_id": subcategorias[3].id,  # Iluminação
+                # "subcategory_id": subcategorias[3].id,
                 "brand": "PLS",
                 "internal_code": "ILU-003",
                 "purchase_value": Decimal("4500.00"),
@@ -406,8 +406,8 @@ def seed_database():
             {
                 "name": "Cadeira de Rodas Motorizada Premium",
                 "description": "Cadeira de rodas motorizada de alta qualidade, bateria de longa duração, controle joystick, assento confortável.",
-                "category_id": categorias[2].id,
-                "subcategory_id": subcategorias[7].id,  # Mobilidade
+                "category_id": subcategorias[7].id,  # Mobilidade
+                # "subcategory_id": subcategorias[7].id,
                 "brand": "Ortobras",
                 "internal_code": "MED-004",
                 "purchase_value": Decimal("8500.00"),
