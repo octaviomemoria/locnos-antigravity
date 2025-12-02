@@ -35,6 +35,7 @@ type PersonFormData = z.infer<typeof personSchema>;
 interface PersonModalProps {
     open: boolean;
     onClose: () => void;
+    person?: any;
 }
 
 const PERSON_TYPES = [

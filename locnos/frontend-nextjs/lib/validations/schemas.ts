@@ -9,7 +9,7 @@ export const equipmentSchema = z.object({
     internal_code: z.string().min(1, 'Código interno é obrigatório'),
     quantity_total: z.number().min(1, 'Quantidade deve ser maior que 0'),
     rental_value: z.number().min(0, 'Valor deve ser maior ou igual a 0').optional(),
-    status: z.enum(['AVAILABLE', 'RENTED', 'MAINTENANCE', 'UNAVAILABLE']).default('AVAILABLE'),
+    status: z.enum(['AVAILABLE', 'RENTED', 'MAINTENANCE', 'UNAVAILABLE']),
 });
 
 export type EquipmentFormData = z.infer<typeof equipmentSchema>;

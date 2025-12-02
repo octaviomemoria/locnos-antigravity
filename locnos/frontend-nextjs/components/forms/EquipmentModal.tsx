@@ -50,7 +50,7 @@ export function EquipmentModal({ open, onClose, equipment: initialEquipment, mod
             category_id: equipment.category_id,
             quantity_total: equipment.quantity_total,
             rental_value: equipment.rental_value || undefined,
-            status: equipment.status,
+            status: equipment.status || 'AVAILABLE',
         } : {
             status: 'AVAILABLE',
             quantity_total: 1,

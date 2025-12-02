@@ -84,7 +84,7 @@ export default function PersonDetailPage() {
                     </Button>
                     <h1 className="text-3xl font-bold text-gray-900">{displayName}</h1>
                     <div className="flex gap-2 mt-2">
-                        {person.types.map((type) => getTypeBadge(type))}
+                        {person.types.map((type: string) => getTypeBadge(type))}
                     </div>
                 </div>
                 <div className="flex gap-2">
