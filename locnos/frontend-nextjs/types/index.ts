@@ -165,13 +165,25 @@ export interface Person {
 
     // Dados específicos
     references?: PersonReference[];
+    documents?: any; // JSONB - documentos anexados
     driver_data?: DriverData;
+    employee_data?: any; // JSONB
+    supplier_data?: any; // JSONB
+    partner_data?: any; // JSONB
 
     // Status
     status: PersonStatus;
     active: boolean;
     credit_limit: number;
     defaulter: boolean;
+
+    // Estatísticas
+    total_rentals?: number;
+    total_spent?: number;
+    customer_since?: string;
+
+    // Notas
+    notes?: string;
 
     created_at: string;
     updated_at: string;
