@@ -28,7 +28,8 @@ interface EquipmentModalProps {
     mode?: 'create' | 'edit';
 }
 
-export function EquipmentModal({ open, onClose, equipment, mode = 'create' }: EquipmentModalProps) {
+export function EquipmentModal({ open, onClose, equipment: initialEquipment, mode = 'create' }: EquipmentModalProps) {
+    const equipment = initialEquipment as any;
     const createEquipment = useCreateEquipment();
     const updateEquipment = useUpdateEquipment();
     const [isSubmitting, setIsSubmitting] = useState(false);
