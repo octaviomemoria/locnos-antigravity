@@ -8,11 +8,11 @@ from decimal import Decimal
 from datetime import datetime
 from sqlalchemy.orm import Session
 
-from app.core.database import SessionLocal
+from app.core.database import SessionLocal, init_db, engine, Base
 from app.core.security import get_password_hash
 from app.models.user import User, UserRole, UserStatus, DocumentType
 from app.models.category import Category
-# from app.models.subcategoria import Subcategoria
+from app.models.subcategoria import Subcategoria
 from app.models.person import Person, PersonType, PersonDocumentType, PersonStatus
 from app.models.equipment import Equipment, EquipmentStatus
 
@@ -24,23 +24,25 @@ def seed_database():
     try:
         print("🌱 Iniciando seed do banco de dados...")
         
-        # ============================================================================
-        # LIMPAR DADOS ANTIGOS
-        # ============================================================================
-        print("\n🗑️  Limpando dados antigos...")
-        db.query(Equipment).delete()
-        # db.query(Subcategoria).delete()
-        db.query(Person).delete()
-        db.query(Category).delete()
-        db.query(User).delete()
-        db.commit()
-        print("✅ Dados antigos removidos")
+        # Recriar tabelas para garantir schema correto
+        print("🔥 Recriando tabelas...")
+        
+        # Drop legacy tables explicitly
+        from sqlalchemy import text
+        with engine.connect() as connection:
+            connection.execute(text("DROP TABLE IF EXISTS users CASCADE"))
+            connection.execute(text("DROP TABLE IF EXISTS equipment CASCADE"))
+            connection.execute(text("DROP TABLE IF EXISTS categories CASCADE"))
+            connection.execute(text("DROP TABLE IF EXISTS subcategories CASCADE")) # Old name if existed
+            connection.commit()
+            
+        Base.metadata.drop_all(bind=engine)
+        init_db()
         
         # ============================================================================
         # USUÁRIOS
         # ============================================================================
         print("\n👥 Criando usuários...")
-        
         admin_user = User(
             email="admin@locnos.com.br",
             name="Administrador Sistema",

@@ -221,7 +221,7 @@ class Rota(Base):
     # APROVAÇÃO E CONTROLE
     # =========================================================================
     aprovada = Column(Boolean, default=False)
-    aprovada_por_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    aprovada_por_id = Column(UUID(as_uuid=True), ForeignKey("usuarios.id"))
     data_aprovacao = Column(DateTime(timezone=True))
     
     # =========================================================================
@@ -229,8 +229,8 @@ class Rota(Base):
     # =========================================================================
     ativa = Column(Boolean, default=True, nullable=False, index=True)
     
-    criado_por_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
-    atualizado_por_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    criado_por_id = Column(UUID(as_uuid=True), ForeignKey("usuarios.id"))
+    atualizado_por_id = Column(UUID(as_uuid=True), ForeignKey("usuarios.id"))
     criado_em = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     atualizado_em = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     

@@ -38,7 +38,7 @@ class DocumentType(str, enum.Enum):
 class User(Base):
     """Model de Usuário"""
     
-    __tablename__ = "users"
+    __tablename__ = "usuarios"
     
     # Identificação
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)

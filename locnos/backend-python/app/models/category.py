@@ -14,7 +14,7 @@ from app.core.database import Base
 class Category(Base):
     """Model de Categoria"""
     
-    __tablename__ = "categories"
+    __tablename__ = "categorias"
     
     # Identificação
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -28,7 +28,7 @@ class Category(Base):
     
     # Hierarquia
     # Hierarquia
-    parent_id = Column("parentId", UUID(as_uuid=True), ForeignKey("categories.id"), nullable=True, index=True)
+    parent_id = Column("parentId", UUID(as_uuid=True), ForeignKey("categorias.id"), nullable=True, index=True)
     
     # Ordenação
     order = Column(Integer, default=0, index=True)

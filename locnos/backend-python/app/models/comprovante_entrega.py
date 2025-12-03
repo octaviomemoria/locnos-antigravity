@@ -232,7 +232,7 @@ class ComprovanteEntrega(Base):
     # =========================================================================
     # METADATA E AUDITORIA
     # =========================================================================
-    criado_por_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    criado_por_id = Column(UUID(as_uuid=True), ForeignKey("usuarios.id"))
     criado_em = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     atualizado_em = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
     

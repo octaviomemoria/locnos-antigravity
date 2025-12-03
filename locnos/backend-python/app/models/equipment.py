@@ -24,7 +24,7 @@ class EquipmentStatus(str, enum.Enum):
 class Equipment(Base):
     """Model de Equipamento"""
     
-    __tablename__ = "equipment"
+    __tablename__ = "equipamentos"
     
     # Identificação
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -35,7 +35,7 @@ class Equipment(Base):
     
     # Categoria e Subcategoria
     # Categoria e Subcategoria
-    category_id = Column("categoryId", UUID(as_uuid=True), ForeignKey("categories.id"), nullable=False, index=True)
+    category_id = Column("categoryId", UUID(as_uuid=True), ForeignKey("categorias.id"), nullable=False, index=True)
     # subcategory_id = Column("subcategoryId", UUID(as_uuid=True), ForeignKey("subcategorias.id"), nullable=True, index=True)
     
     # 🆕 NOVOS CAMPOS - Informações Expandidas
