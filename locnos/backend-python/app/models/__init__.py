@@ -4,6 +4,7 @@ from .equipment import Equipment, EquipmentStatus
 from .category import Category
 from .subcategoria import Subcategoria
 from .person import Person, PersonType, PersonDocumentType, PersonStatus
+from .contract import Contract, ContractItem, ContractStatus
 
 # Sistema Logística Droguista
 from .pedido import Pedido, StatusPedido, TipoFrete
@@ -19,6 +20,7 @@ __all__ = [
     "Category",
     "Subcategoria",
     "Person", "PersonType", "PersonDocumentType", "PersonStatus",
+    "Contract", "ContractItem", "ContractStatus",
     # Logística
     "Pedido", "StatusPedido", "TipoFrete",
     "Transportadora",
